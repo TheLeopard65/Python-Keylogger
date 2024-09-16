@@ -62,7 +62,7 @@ def on_press(key):
             }
             special_key = special_keys.get(key)
         if special_key:
-                key_entry = f'{special_key}'
+            key_entry = f'{special_key}'
         else:
             return
         
