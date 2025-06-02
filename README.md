@@ -1,61 +1,67 @@
-# Keylogger Script
+# PYTHON KEYLOGGER SCRIPT
 
-This repository contains a Python script for a keylogger that captures keystrokes and sends them to a Discord channel via a webhook. The script uses the `pynput` library to listen for keystrokes and the `requests` library to send messages to Discord.
+This repository contains a Python script for a keylogger that captures keystrokes and sends them to a Discord channel via a webhook. The script uses the [`pynput`](https://pypi.org/project/pynput/) library to listen for keystrokes and [`requests`](https://pypi.org/project/requests/) to send messages to Discord.
 
 ## Features
 
-- Captures keystrokes including special keys.
+- Captures keystrokes including special keys like Ctrl, Shift, etc.
 - Buffers keystrokes and sends them to Discord in batches of 100.
 - Periodically sends any remaining buffered keystrokes every 5 seconds.
-- Supports basic key formatting for special keys.
+- Supports basic formatting for special keys like `[CTRL]`, `[SHIFT]`, etc.
 
 ## Prerequisites
 
-Before running the script, ensure you have the following Python packages installed:
+### 1. Running Locally
 
-- `requests`
-- `pynput`
+1. **Install Dependencies**: Ensure you have the required Python packages installed:
 
-You can install these packages using `pip`:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```bash
-pip install requests pynput
-```
+2. **Configure Webhook URL**: Add your Discord webhook URL to the `.env` file:
 
-## Configuration
+   ```env
+   WEBHOOK_URL='YOUR_DISCORD_WEBHOOK_URL_HERE'
+   ```
 
-1. **Webhook URL**: Replace the placeholder webhook URL in the script with your actual Discord webhook URL:
+3. **Run the Script**
 
-    ```python
-    WEBHOOK_URL = 'YOUR_DISCORD_WEBHOOK_URL_HERE'
-    ```
+   ```bash
+   python keylogger.py
+   ```
 
-2. **Buffer Size and Interval**: The buffer size is set to 100 keystrokes, and the script sends messages every 5 seconds. You can adjust these values if needed.
+4. **Stop the Script**: Use `Ctrl + C` to stop the script. It will flush any remaining buffered keystrokes before exiting.
 
-## Usage
+### 2. Running with Docker
 
-1. **Run the Script**: Execute the script using Python:
+1. **Build the Docker Image**
 
-    ```bash
-    python keylogger.py
-    ```
+   ```bash
+   docker build -t keylogger .
+   ```
 
-2. **Stop the Script**: To stop the script, use Ctrl+C in the terminal where it is running. The script will flush any remaining buffered keystrokes before exiting.
+2. **Run the Docker Container**
+
+   ```bash
+   docker run -it --name keylogger keylogger
+   ```
 
 ## Important Notes
 
-- **Ethical Use**: This script is intended for educational purposes only. Unauthorized use of keyloggers can be illegal and unethical. Ensure you have explicit permission to run this script on any machine.
-- **Rate Limits**: Be mindful of Discord rate limits. Sending too many messages in a short period may result in your webhook being rate-limited or blocked.
-- **Privacy**: Be cautious with handling sensitive information. Keyloggers can capture personal and confidential data.
+* **Ethical Use**: This script is for educational purposes only. Unauthorized use of keyloggers is illegal and unethical. Ensure you have explicit permission before running it on any machine.
+* **Rate Limits**: Be aware of Discord rate limits. Sending too many messages quickly can cause your webhook to be rate-limited or blocked.
+* **Privacy**: Keyloggers capture sensitive data. Use responsibly and securely handle any captured information.
 
-## License
+### License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+- This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Disclaimer
+### Disclaimer
 
-The authors of this script do not take responsibility for any misuse of the code. Use it at your own risk and ensure you comply with all relevant laws and regulations.
+- The authors are not responsible for any misuse of this code or damage caused.
+- Use it at your own risk and comply with all applicable laws and regulations.
 
-## Contact
+### Contact
 
-For any questions or feedback, please open an issue on the repository or contact the repository maintainer.
+- For questions or feedback, please open an issue on this repository or contact the maintainer.
