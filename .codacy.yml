@@ -1,0 +1,20 @@
+---
+engines:
+  pylint:
+    enabled: true
+  flake8:
+    enabled: true
+  bandit:
+    enabled: true
+  radon:
+    enabled: true
+
+languages:
+  python:
+    enabled: true
+
+exclude_paths:
+  - "README.md"
+  - ".git/**/*"
+  - "LICENSE"
+  - ".env"

